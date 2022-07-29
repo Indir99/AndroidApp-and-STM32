@@ -98,5 +98,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,myBltDevice.name+"\n"+myBltDevice.address,Toast.LENGTH_LONG).show()
         }
 
+
+
     }
 }
