@@ -51,3 +51,20 @@ Reset the disco board. In Terminal you should see:
 <p align="center">
 <img src="https://github.com/Indir99/AndroidApp-and-STM32/blob/master/images/terminal1.png" width="535" height="136" />
 </[>
+
+Now, everything is ready, so you can communicate.
+
+#### Quick guide part 2
+1. First, you have to pair your phone with your HC Modlue
+2. In app, turn on bluetooth
+3. Check if HC module is paired
+4. Connect your disco borad
+5. Press "Connect to HC module" button (andorid app side) and wait to connect
+6. Turn your leds
+
+At the following link you can see how the app work:
+```
+https://www.dropbox.com/s/c3xesxhcbhvd5dd/STM32-LEDS.mp4?dl=0
+```
+
+
