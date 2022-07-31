@@ -49,5 +49,5 @@ sudo picocom/dev/ttyUSB0 -b 115200
 ```
 Reset the disco board. In Terminal you should see:
 <p align="center">
-<img src="https://github.com/Indir99/AndroidApp-and-STM32/blob/master/images/terminal1.png" width="300" height="300" />
+<img src="https://github.com/Indir99/AndroidApp-and-STM32/blob/master/images/terminal1.png" width="535" height="136" />
 </[>
