@@ -120,7 +120,22 @@ class MainActivity : AppCompatActivity() {
             //mConnectThread.start();
 
         }
+        binding.btnSend.setOnClickListener(){
+            sendCommand("Indir salje poruku\n")
         }
+        }
+
+    private fun sendCommand(input: String) {
+        if (btSocket != null) {
+            try{
+                btSocket!!.outputStream.write(input.toByteArray())
+                Toast.makeText(this, "Message sent:\n"+input, Toast.LENGTH_SHORT).show()
+            } catch(e: IOException) {
+                e.printStackTrace()
+                Toast.makeText(this, "Can't send", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
         //var mConnectThread = ConnectThread(this)
         //mConnectThread.start();
