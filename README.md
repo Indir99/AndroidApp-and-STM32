@@ -12,4 +12,4 @@ In this project we will use:
 
 We have created a simple application to communicate with the hardware using the Bluetooth communication protocol.
 The layout of the application is shown below:
-![app photo](https://www.dropbox.com/s/fx52bwglg7t7gmz/app-photo.jpg?dl=0)
+![app photo](images/app-photo.jpg)
