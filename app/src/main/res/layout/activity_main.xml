@@ -9,43 +9,43 @@
 
     <Button
         android:id="@+id/btnBluetoothOn"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="Blt On"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBluetoothOff"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="Blt Off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toEndOf="@+id/btnBluetoothOn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBluetoothPaired"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:text="Bluetooth On"
+        android:layout_marginTop="120dp"
+        android:text="Check if HC is paired"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnBluetoothOff"
+        android:id="@+id/btnConnect"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:text="Bluetooth Off"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBluetoothOn" />
-
-    <Button
-        android:id="@+id/btnBluetoothPaired"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:text="Show Bluetooth paired devices"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBluetoothOff" />
-
-    <Button
-        android:id="@+id/btnBluetoothHC"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:text="IS HC Paired?"
+        android:layout_marginTop="30dp"
+        android:text="Connect to HC module"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,15 +53,55 @@
 
     <Button
         android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Test message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBluetoothHC"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintTop_toBottomOf="@+id/btnConnect"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <Button
+        android:id="@+id/btnLED1"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="350dp"
+        android:text="LED1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnLED2"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="350dp"
+        android:text="LED2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLED1" />
+
+    <Button
+        android:id="@+id/btnLED3"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="350dp"
+        android:text="LED3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLED2" />
+
+    <Button
+        android:id="@+id/btnLED4"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="350dp"
+        android:text="LED4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,20 +22,22 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    // bluetooth device koji cemo kasnije koristiti za uspostavljanje konekcije
+    //bluetooth device which will be used for connecting
     lateinit var myBltDevice: BluetoothDevice
 
 
-    // Binding za buttone
+    // Binding for buttons
     lateinit var binding: ActivityMainBinding
-    // Bluetooth i permission varijable
+    // Bluetooth and permission variables
     lateinit var bluetoothManager: BluetoothManager
     lateinit var bluetoothAdapter: BluetoothAdapter
     lateinit var takePermission: ActivityResultLauncher<String>
     lateinit var takeResultLauncher: ActivityResultLauncher<Intent>
 
-    val MY_UIDD = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    //UUID witch is specific for HC-05/HC-06 bluetooth modules
+    val MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
+    //Bluetooth Socket for communication with HC module
     private lateinit var btSocket: BluetoothSocket;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         bluetoothManager = getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
+
+        // Permission
         takePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -62,16 +66,18 @@ class MainActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
                 ActivityResultCallback { result ->
                     if (result.resultCode == RESULT_OK) {
-                        Toast.makeText(applicationContext, "Bluetooth ON", Toast.LENGTH_SHORT)
+                        Toast.makeText(applicationContext, "Bluetooth enabled", Toast.LENGTH_SHORT)
                             .show()
                     } else {
-                        Toast.makeText(applicationContext, "Bluetooth OFF", Toast.LENGTH_SHORT)
+                        Toast.makeText(applicationContext, "Bluetooth disabled", Toast.LENGTH_SHORT)
                             .show()
                     }
                 })
+        // button for Bluetooth enable
         binding.btnBluetoothOn.setOnClickListener() {
             takePermission.launch(android.Manifest.permission.BLUETOOTH_CONNECT)
         }
+        //button for Bluetooth disable
         binding.btnBluetoothOff.setOnClickListener() {
             if (ActivityCompat.checkSelfPermission(
                     applicationContext,
@@ -83,16 +89,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        // Getting paired devices
         binding.btnBluetoothPaired.setOnClickListener() {
-            val data: StringBuffer = StringBuffer()
-            //val data = arrayListOf<String>()
-            val pairedDevices = bluetoothAdapter.bondedDevices
+            val data: StringBuffer = StringBuffer() //Buffer for paired Devices
+            val pairedDevices = bluetoothAdapter.bondedDevices // Get paired devices
+            // pushing devices data in buffer and searching for HC module
             for (device in pairedDevices) {
                 data.append("Device name: " + device.name + "\nDevice address: " + device.address)
                 if (device.name == "HC-05" || device.name == "HC-06") {
                     myBltDevice = device
-                    //myBltDevice.name=device.name
-                    //myBltDevice.address=device.address
                 }
             }
             if (data.isEmpty()) {
@@ -102,18 +108,23 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             } else {
-                Toast.makeText(applicationContext, data, Toast.LENGTH_SHORT).show()
+                if(myBltDevice.name == "HC-05" || myBltDevice.name =="HC-06"){
+                    Toast.makeText(applicationContext,myBltDevice.name+"\n"+myBltDevice.address, Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    Toast.makeText(applicationContext, "You have paired devices, but HC is not paired", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
-        binding.btnBluetoothHC.setOnClickListener() {
-            btSocket =myBltDevice.createRfcommSocketToServiceRecord(MY_UIDD)
-            //btSocket=myBltDevice.createInsecureRfcommSocketToServiceRecord(MY_UIDD)
+        binding.btnConnect.setOnClickListener() {
+            // Creating socket
+            btSocket =myBltDevice.createRfcommSocketToServiceRecord(MY_UUID)
                 try {
                     btSocket.connect()
-                    Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Connected to HC module", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
-                    Toast.makeText(this, "Can't Connect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Can't Connect to HC module", Toast.LENGTH_SHORT).show()
                 }
             // }
             //var mConnectThread = ConnectThread(myBltDevice,this)
@@ -121,8 +132,21 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.btnSend.setOnClickListener(){
-            sendCommand("Indir salje poruku\n")
+            sendCommand("Test message")
         }
+        binding.btnLED1.setOnClickListener(){
+            sendCommand("PD12#1\n")
+        }
+        binding.btnLED2.setOnClickListener(){
+            sendCommand("PD13#1\n")
+        }
+        binding.btnLED3.setOnClickListener(){
+            sendCommand("PD14#1\n")
+        }
+        binding.btnLED4.setOnClickListener(){
+            sendCommand("PD15#1\n")
+        }
+
         }
 
     private fun sendCommand(input: String) {
